@@ -1,0 +1,6 @@
+{
+  "name": "Prochesta Co-Operative",
+  "description": "Empowering women, strengthening communities, and creating opportunities across Assam, India.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
