@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { GALLERY_DATA } from "../data";
-import { ZoomIn, Tag } from "lucide-react";
+import { ZoomIn, Tag, Facebook } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 export default function MasonryGallery() {
     const [selectedImage, setSelectedImage] = useState<any | null>(null);
@@ -21,9 +21,15 @@ export default function MasonryGallery() {
               Moments of Change
             </h2>
           </div>
-          <p className="text-sm text-gray-500 font-sans max-w-sm text-left">
-            Explore snapshots of our journey, community programmes, training sessions, awareness campaigns, and the inspiring individuals who continue to make positive change possible.
-          </p>
+          <div className="flex flex-col items-start gap-4 max-w-sm">
+            <p className="text-sm text-gray-500 font-sans text-left">
+              Explore snapshots of our journey, community programmes, training sessions, awareness campaigns, and the inspiring individuals who continue to make positive change possible.
+            </p>
+            <motion.a whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }} href="https://www.facebook.com/prochesta.mfi" target="_blank" rel="noopener noreferrer" className="inline-flex items-center space-x-2 px-5 py-3 bg-gradient-to-r from-pink-600 to-[#D63384] text-white text-[11px] font-bold tracking-wider uppercase font-mono rounded-xl shadow-lg shadow-pink-500/10 cursor-pointer select-none transition-all">
+              <Facebook className="w-4 h-4 text-white"/>
+              <span>More Pictures</span>
+            </motion.a>
+          </div>
         </div>
 
         

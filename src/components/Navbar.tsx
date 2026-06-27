@@ -21,7 +21,7 @@ export default function Navbar({ onOpenVolunteer, onOpenInternship, onOpenAdmin,
         { label: "Our Story", id: "about" },
         { label: "Events & Awards", id: "verticals" },
         { label: "Artisan Gallery", id: "gallery" },
-        { label: "How to Donate", id: "donations" },
+        { label: "Donate", id: "donations" },
         { label: "Contact Us", id: "contact" }
     ];
     const handleNavClick = (id: string) => {

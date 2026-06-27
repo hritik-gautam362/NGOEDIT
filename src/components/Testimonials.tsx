@@ -24,6 +24,7 @@ export default function Testimonials() {
                 "Assam Financial Corporation",
                 "Assam Gramin Vikash Bank",
                 "NEDFi",
+                "National Cooperative Development Corporation (NCDC)",
                 "Rashtriya Gramin Vikash Nidhi"
             ]
         },
@@ -63,6 +64,7 @@ export default function Testimonials() {
                 "Rashtriya Mahila Kosh, New Delhi",
                 "FWWB",
                 "NIPCCD",
+                "Department Of Handloom And Textile, Government Of Assam",
                 "NEDFi"
             ]
         },
@@ -116,7 +118,7 @@ export default function Testimonials() {
               Supporting Agencies.
             </h2>
             <p className="text-sm text-gray-500 font-sans">
-              Procheesta is backed by established national banks, micro-finance federations, academic research bodies, and regulatory advisors ensuring robust social development governance.
+              Prochesta is backed by established national banks, micro-finance federations, academic research bodies, and regulatory advisors ensuring robust social development governance.
             </p>
           </div>
 

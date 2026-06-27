@@ -2,6 +2,15 @@
   "volunteers": [],
   "internships": [],
   "donations": [],
-  "inquiries": [],
+  "inquiries": [
+    {
+      "id": "inq-1782372712985",
+      "fullName": "hi",
+      "email": "hritikgautam362@gmail.com",
+      "message": "hi",
+      "status": "Reviewed",
+      "date": "2026-06-25T07:31:52.985Z"
+    }
+  ],
   "adminPin": "2026"
 }

@@ -122,7 +122,7 @@ export default function ProgramsStagger() {
                 </div>
 
                 <p>
-                  Late Ashok Saikia helped Prochesta to grow as a self successful organization. To keep his memory alive we started this Ashok Saikia Award.
+                  Late Ashok Saikia was the initiator and helped Prochesta to grow as a self successful organization. To keep his memory alive we started this Ashok Saikia Award.
                 </p>
               </div>
             </div>

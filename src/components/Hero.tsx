@@ -66,7 +66,7 @@ export default function Hero({ onOpenVolunteer, onOpenInternship, onScrollToSect
             <div className="inline-flex items-center space-x-2 bg-[#D63384]/10 px-4 py-1.5 rounded-full border border-[#D63384]/15">
               <Sparkles className="w-4 h-4 text-[#D63384] animate-spin" style={{ animationDuration: "6s" }}/>
               <span className="text-xs font-semibold tracking-wider text-[#D63384] uppercase">
-                Prochesta Co-operative Society Asom
+                Prochesta Multipurpose Co-operative Society Asom
               </span>
             </div>
 
@@ -120,11 +120,11 @@ export default function Hero({ onOpenVolunteer, onOpenInternship, onScrollToSect
                 <div className="flex justify-between items-start">
                   <span className="text-[10px] font-mono tracking-widest text-[#D63384] font-bold uppercase flex items-center space-x-1.5">
                     <span className="w-1.5 h-1.5 bg-[#D63384] rounded-full animate-pulse"/>
-                    <span>Assam Women's Cooperative</span>
+                    <span>A Multipurpose co-operative society of assam </span>
                   </span>
-                  <div className="bg-[#D63384]/10 text-[#D63384] text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  {/* <div className="bg-[#D63384]/10 text-[#D63384] text-[9px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                     Live Ledger
-                  </div>
+                  </div> */}
                 </div>
 
                 

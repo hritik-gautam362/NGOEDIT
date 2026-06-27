@@ -42,7 +42,7 @@ const milestones = [
     {
         year: "Today",
         title: "Today",
-        description: "Supporting women through empowerment, entrepreneurship, financial inclusion, and community development.",
+        description: "Supporting women through empowerment, developing entrepreneurship and financial inclusion, and community development.",
         icon: Heart,
         color: "from-amber-500 to-orange-500",
         glow: "rgba(245, 158, 11, 0.4)",
@@ -123,16 +123,16 @@ export default function AboutUs() {
                   The story of Prochesta began with a simple belief — when women are empowered with knowledge, entire communities move forward.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  In the late 1980s, literacy movements across Assam inspired local volunteers and learners, many of whom were women eager to continue their journey beyond education. What started as a movement for learning soon became a movement for opportunity, self-reliance, and collective growth.
+                  In the late 1980s, literacy movements across Assam inspired local volunteers and learners, majority of whom were women eager to continue their journey beyond education. What started as a movement for learning soon became a movement for opportunity, self-reliance, and collective growth.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  Through discussions, workshops, and community participation, women came together to form Self Help Groups (SHGs), creating a foundation for financial independence and social progress. These groups quickly spread across rural Assam, bringing people together through shared purpose and determination.
+                  Through discussions, workshops, and community participation, women came together to form Self Help Groups (SHGs), creating a foundation for financial independence and social progress. These groups quickly spread across rural Assam, bringing people together through shared purpose and determination. It was named Prochesta - endeavour.
                 </motion.p>
                 <motion.p variants={itemVariants}>
                   In 1999, Prochesta was formally registered as a society, strengthening its mission to support women and communities through organized development initiatives. Over the years, the organization continued to grow, eventually becoming a registered cooperative in 2012.
                 </motion.p>
                 <motion.p variants={itemVariants}>
-                  Today, Prochesta continues to work alongside communities to promote financial inclusion, entrepreneurship, skill development, and sustainable opportunities for women across Assam.
+                  Today, Prochesta continues to work alongside communities to promote financial inclusion, entrepreneurship and skill development, and creating sustainable opportunities for women across Assam.
                 </motion.p>
               </motion.div>
             </div>
@@ -587,91 +587,91 @@ export default function AboutUs() {
                     name: "Ms Madhobi Medhi",
                     role: "Chairperson",
                     initials: "M.M",
-                    description: "Leading intellectual and social advocate shaping Prochesta's macro-governance, institutional compliance, and ethical mandate structures."
+                    // description: "Leading intellectual and social advocate shaping Prochesta's macro-governance, institutional compliance, and ethical mandate structures."
                 },
                 {
                     name: "Dr. Anjana Borkakati",
                     role: "Executive Director",
                     initials: "A.B",
-                    description: "Chief operational director steering program execution, donor relationships, self-help-group networks, and academic-grassroots translation modules."
+                    // description: "Chief operational director steering program execution, donor relationships, self-help-group networks, and academic-grassroots translation modules."
                 },
                 {
                     name: "Mr. Subhan Bora",
                     role: "Managing Director (Ex Officio Member)",
                     initials: "S.B",
-                    description: "Administrative registrar coordinating external department clearances, structural auditing mandates, and active cooperative oversight models."
+                    // description: "Administrative registrar coordinating external department clearances, structural auditing mandates, and active cooperative oversight models."
                 },
                 {
                     name: "Mr. Ranjit Sarma",
                     role: "Director Administration",
                     initials: "R.S",
-                    description: "Supervising internal logistics, physical workspace systems, financial records validation, and regional branch operations connectivity."
+                    // description: "Supervising internal logistics, physical workspace systems, financial records validation, and regional branch operations connectivity."
                 },
                 {
                     name: "Mr. Tapan Kr. Sarma",
                     role: "Director (Member)",
                     initials: "T.S",
-                    description: "Coordinating executive communications, public welfare linkages, field deployment strategies, and general assembly voting consensus."
+                    // description: "Coordinating executive communications, public welfare linkages, field deployment strategies, and general assembly voting consensus."
                 },
                 {
                     name: "Mr. Jamini Ranjan Das",
                     role: "Director (Member)",
                     initials: "J.D",
-                    description: "Directing weaver guild alliances, physical material logistics, and grassroots cluster development initiatives."
+                    // description: "Directing weaver guild alliances, physical material logistics, and grassroots cluster development initiatives."
                 },
                 {
                     name: "Mrs. Sushnata Goswami",
                     role: "Director (Member)",
                     initials: "S.G",
-                    description: "Dedicated welfare leader coordinating regional women-empowerment cooperatives and village community networks."
+                    // description: "Dedicated welfare leader coordinating regional women-empowerment cooperatives and village community networks."
                 },
                 {
                     name: "Mr. Dwipendra Kr. Sharma",
                     role: "Director (Member)",
                     initials: "D.S",
-                    description: "Managing regional stakeholder communications, local micro-credit outreach campaigns, and compliance audit alignment with cooperative rules."
+                    // description: "Managing regional stakeholder communications, local micro-credit outreach campaigns, and compliance audit alignment with cooperative rules."
                 },
-                {
-                    name: "Mr. Hiranya Bhattacharya",
-                    role: "Director (Member)",
-                    initials: "H.B",
-                    description: "Providing legal guidance and administrative strategy support for grassroots cooperative federation activities."
-                },
+                // {
+                //     name: "Mr. Hiranya Bhattacharya",
+                //     role: "Director (Member)",
+                //     initials: "H.B",
+                //     description: "Providing legal guidance and administrative strategy support for grassroots cooperative federation activities."
+                // },
                 {
                     name: "Mr. Munindra Kakati",
                     role: "Director (Member)",
                     initials: "M.K",
-                    description: "Advising on market integration, digital training workshops, and cooperative weavers' financial accessibility structures."
+                    // description: "Advising on market integration, digital training workshops, and cooperative weavers' financial accessibility structures."
                 },
                 {
                     name: "Mr. Paresh Dev Choudhury",
                     role: "Director (Member)",
                     initials: "P.C",
-                    description: "Supervising field research outreach, demographic data classification, and community developmental program reviews."
+                    // description: "Supervising field research outreach, demographic data classification, and community developmental program reviews."
                 },
                 {
                     name: "Mr. Balen Choudhury",
                     role: "Director (Member)",
                     initials: "B.C",
-                    description: "Structuring logistics, artisan tools distribution pipelines, and workshop facilities coordination across rural zones."
+                    // description: "Structuring logistics, artisan tools distribution pipelines, and workshop facilities coordination across rural zones."
                 },
                 {
                     name: "Mr. Kusum Sarma",
                     role: "Director (Member)",
                     initials: "K.S",
-                    description: "Coordinating development funds allocation, field audits, and primary relations with state-level cooperative agencies."
+                    // description: "Coordinating development funds allocation, field audits, and primary relations with state-level cooperative agencies."
                 },
                 {
                     name: "Ms Kalpana Goswami",
                     role: "Director (Member)",
                     initials: "K.G",
-                    description: "Focusing on women empowerment programs, craft design innovations, and micro-entrepreneurship incubation networks."
+                    // description: "Focusing on women empowerment programs, craft design innovations, and micro-entrepreneurship incubation networks."
                 },
                 {
                     name: "Mrs. Labanya Das",
                     role: "Director (Member)",
                     initials: "L.D",
-                    description: "Mobilizing local weaver self-help cliques, raw materials distribution, and on-ground welfare support models."
+                    // description: "Mobilizing local weaver self-help cliques, raw materials distribution, and on-ground welfare support models."
                 }
             ].map((member, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.015 }} whileHover={{ scale: 1.01, y: -2 }} className="p-5 rounded-[20px] bg-white border border-slate-200/80 hover:border-[#D63384]/30 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(214,51,132,0.04)] flex items-start space-x-3.5 transition-all duration-300">
                     
@@ -699,7 +699,7 @@ export default function AboutUs() {
             
             <div className="p-4 sm:p-5 bg-white border-t border-slate-150 flex flex-col sm:flex-row items-center justify-between gap-2.5 text-[9px] font-mono text-gray-400">
               <span>REGISTERED REGIONAL DIRECTORS DIRECTORY</span>
-              <span className="text-[#D63384] font-bold">PROCHESTA CO-OPERATIVE SOCIETY</span>
+              <span className="text-[#D63384] font-bold">PROCHESTA MULTIPURPOSE CO-OPERATIVE SOCIETY</span>
             </div>
           </motion.div>
         </motion.div>)}
@@ -765,31 +765,31 @@ export default function AboutUs() {
                     name: "Ms Madhobi Medhi",
                     role: "Chairperson",
                     initials: "M.M",
-                    description: "Leading intellectual and social advocate shaping Prochesta's macro-governance, institutional compliance, and ethical mandate structures."
+                    // description: "Leading intellectual and social advocate shaping Prochesta's macro-governance, institutional compliance, and ethical mandate structures."
                 },
                 {
                     name: "Dr. Anjana Borkakati",
                     role: "Executive Director",
                     initials: "A.B",
-                    description: "Chief operational director steering program execution, donor relationships, self-help-group networks, and academic-grassroots translation modules."
+                    // description: "Chief operational director steering program execution, donor relationships, self-help-group networks, and academic-grassroots translation modules."
                 },
                 {
                     name: "Mr. Subhan Bora",
                     role: "Managing Director (Ex Officio Member)",
                     initials: "S.B",
-                    description: "Administrative registrar coordinating external department clearances, structural auditing mandates, and active cooperative oversight models."
+                    // description: "Administrative registrar coordinating external department clearances, structural auditing mandates, and active cooperative oversight models."
                 },
                 {
                     name: "Mr. Ranjit Sarma",
                     role: "Director Administration",
                     initials: "R.S",
-                    description: "Supervising internal logistics, physical workspace systems, financial records validation, and regional branch operations connectivity."
+                    // description: "Supervising internal logistics, physical workspace systems, financial records validation, and regional branch operations connectivity."
                 },
                 {
                     name: "Mr. Tapan Kr. Sarma",
                     role: "Director (Member)",
                     initials: "T.S",
-                    description: "Coordinating executive communications, public welfare linkages, field deployment strategies, and general assembly voting consensus."
+                    // description: "Coordinating executive communications, public welfare linkages, field deployment strategies, and general assembly voting consensus."
                 }
             ].map((member, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02 }} whileHover={{ scale: 1.01, y: -2 }} className="p-5 rounded-[20px] bg-white border border-slate-200/80 hover:border-[#7C3AED]/30 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(124,58,237,0.04)] flex items-start space-x-3.5 transition-all duration-300">
                     

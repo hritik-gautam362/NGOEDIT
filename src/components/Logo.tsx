@@ -23,10 +23,10 @@ export default function Logo({ className = "", logoClassName = "w-11 h-11", icon
         <img src={paths[pathIndex]} alt="PROCHESTA Logo" className={`${logoClassName} select-none object-contain`} onError={handleImgError}/>
         {!iconOnly && (<div className="flex flex-col text-left">
             <span className={`text-[14px] md:text-[15px] font-black tracking-[0.06em] leading-tight font-sans ${dark ? "text-white" : "text-gray-900"}`}>
-              PROCHESTA
+              PROCHESTA Multipurpose
             </span>
             <span className="text-[9px] md:text-[10px] font-bold tracking-[0.15em] text-[#D63384] uppercase font-sans">
-              Co-operative Asom
+              Co-operative Society Asom
             </span>
           </div>)}
       </div>);

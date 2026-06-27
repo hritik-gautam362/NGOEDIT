@@ -9,6 +9,7 @@ export default function ContactAndMap() {
     const [success, setSuccess] = useState(false);
     const [error, setError] = useState("");
     const [isBranchesModalOpen, setIsBranchesModalOpen] = useState(false);
+    
     const branches = [
         { id: 1, name: "Guwahati Branch", district: "Kamrup Metro District", code: "BR-GH-01", type: "Main Metropolitan Branch", region: "Guwahati, Silpukhuri" },
         { id: 2, name: "Raha Branch", district: "Nagaon District", code: "BR-RH-02", type: "Central Regional Point", region: "Nagaon, Central Assam" },
@@ -119,7 +120,7 @@ export default function ContactAndMap() {
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest font-mono">☎ Our Phone No.</h4>
                   <div className="flex flex-col sm:flex-row justify-between text-xs font-bold font-mono text-gray-800 gap-2 mt-1">
                     <div>📞 03612963506</div>
-                    <div>📞 03612660020</div>
+                    {/* <div>📞 03612660020</div> */}
                   </div>
                 </div>
               </div>
@@ -194,12 +195,12 @@ export default function ContactAndMap() {
                 </a>
               </div>
 
-              <div>
+              {/* <div>
                 <button onClick={handleWhatsApp} className="w-full py-2.5 rounded-xl border border-emerald-300 hover:bg-emerald-50 text-emerald-800 text-xs font-bold transition flex items-center justify-center space-x-1.5 cursor-pointer font-sans">
                   <MessageSquare className="w-4 h-4 text-emerald-650"/>
                   <span>Interactive WhatsApp Advisor</span>
                 </button>
-              </div>
+              </div> */}
 
             </div>
 
