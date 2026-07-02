@@ -94,6 +94,17 @@ export default function CmsEditor({ content, onSave, onResetDefaults }: CmsEdito
         setIsSaving(true);
         setErrorMsg("");
         setSuccessMsg("");
+
+        // Validate timeline milestones in About section
+        const invalidMilestone = draft.aboutUs?.milestones?.find(
+            m => !m.year?.trim() || !m.dateDetail?.trim() || !m.description?.trim()
+        );
+        if (invalidMilestone) {
+            setErrorMsg("Validation Error: Please fill in the Year Badge, Date Detail Header, and Description for all timeline milestones before saving.");
+            setIsSaving(false);
+            return;
+        }
+
         try {
             const success = await onSave(draft);
             if (success) {
