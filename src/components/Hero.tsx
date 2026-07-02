@@ -6,8 +6,12 @@ interface HeroProps {
     onOpenVolunteer: () => void;
     onOpenInternship: () => void;
     onScrollToSection: (id: string) => void;
+    hero?: {
+        title: string;
+        subtitle: string;
+    };
 }
-export default function Hero({ onOpenVolunteer, onOpenInternship, onScrollToSection }: HeroProps) {
+export default function Hero({ onOpenVolunteer, onOpenInternship, onScrollToSection, hero }: HeroProps) {
     const [liveStats, setLiveStats] = useState({
         volunteerCount: 0,
         internCount: 0,
@@ -45,6 +49,15 @@ export default function Hero({ onOpenVolunteer, onOpenInternship, onScrollToSect
         const interval = setInterval(fetchStats, 6000);
         return () => clearInterval(interval);
     }, []);
+
+    const formatHeroTitle = (text: string) => {
+        if (!text) return "";
+        return text
+            .replace(/\n/g, "<br />")
+            .replace(/Women/g, '<span class="text-transparent bg-clip-text bg-gradient-to-r from-[#D63384] to-[#7C3AED]">Women</span>')
+            .replace(/Communities/g, '<span class="italic font-serif font-light text-gray-800">Communities</span>');
+    };
+
     return (<section className="relative min-h-screen pt-24 pb-16 flex items-center justify-center overflow-hidden bg-[#FFF9FB]">
       
       <div className="absolute top-1/4 left-10 w-[450px] h-[450px] bg-gradient-to-tr from-[#D63384]/10 to-[#7C3AED]/5 rounded-full filter blur-[100px] pointer-events-none animate-pulse" style={{ animationDuration: "12s" }}/>
@@ -71,14 +84,11 @@ export default function Hero({ onOpenVolunteer, onOpenInternship, onScrollToSect
             </div>
 
             
-            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-sans font-black tracking-tight text-gray-950 leading-[1.08] relative">
-              Empowering <span className="text-transparent bg-clip-text bg-gradient-to-r from-[#D63384] to-[#7C3AED]">Women</span>.<br />
-              Transforming <span className="italic font-serif font-light text-gray-800">Communities</span>.
-            </h1>
+            <h1 className="text-4xl sm:text-5xl xl:text-6xl font-sans font-black tracking-tight text-gray-950 leading-[1.08] relative" dangerouslySetInnerHTML={{ __html: formatHeroTitle(hero?.title || "Empowering Women.\nTransforming Communities.") }} />
 
             
             <p className="text-base md:text-lg text-gray-650 font-sans max-w-xl leading-relaxed">
-              For over two decades, Prochesta Multipurpose Co-Operative Society Asom Ltd. has been working to strengthen communities through women empowerment, financial inclusion, entrepreneurship development, and sustainable livelihood opportunities across Assam.
+              {hero?.subtitle || "For over two decades, Prochesta Multipurpose Co-Operative Society Asom Ltd. has been working to strengthen communities through women empowerment, financial inclusion, entrepreneurship development, and sustainable livelihood opportunities across Assam."}
             </p>
 
             

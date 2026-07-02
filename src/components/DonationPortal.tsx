@@ -3,8 +3,17 @@ import { DollarSign, CheckCircle, Heart, QrCode } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
 interface DonationPortalProps {
   onSuccess: (donation: any) => void;
+  contactInfo?: {
+      address: string;
+      phoneNumbers: string[];
+      emails: string[];
+  };
+  donationDetails?: {
+      upiId: string;
+      bankDetails: string;
+  };
 }
-export default function DonationPortal({ onSuccess }: DonationPortalProps) {
+export default function DonationPortal({ onSuccess, contactInfo, donationDetails }: DonationPortalProps) {
   const [amount, setAmount] = useState<number>(5000);
   const [customAmount, setCustomAmount] = useState<string>("");
   const [donorName, setDonorName] = useState("");
@@ -153,7 +162,7 @@ export default function DonationPortal({ onSuccess }: DonationPortalProps) {
                 </h4>
                 <p className="text-xs text-gray-500 mt-1">
                   Scan with GPay, PhonePe, or BHIM. <br />
-                  <span className="font-mono text-[#7C3AED] font-semibold">prochesta.mfi@okaxis</span>
+                  <span className="font-mono text-[#7C3AED] font-semibold">{donationDetails?.upiId || "prochesta.mfi@okaxis"}</span>
                 </p>
               </div>
             </motion.div>)}
@@ -163,10 +172,18 @@ export default function DonationPortal({ onSuccess }: DonationPortalProps) {
                 <h4 className="font-bold text-orange-900 uppercase tracking-wider">
                   Contact NGO for Offline Payment
                 </h4>
-                <p className="text-gray-600">Prochesta Multipurpose Co-Operative Society Asom Ltd.</p>
-                <p className="text-gray-600">Address: 2A, Sonadhar Senapati Path Silpukhuri Guwahati – 781003 Assam, India</p>
-                <p className="text-gray-600">Phone: 03612963506 / 03612660020</p>
-                <p className="text-gray-600">Email: <a href="mailto:prochesta@hotmail.com" className="text-gray-600 hover:underline">prochesta@hotmail.com</a> / <a href="mailto:prochesta.mfi@gmail.com" className="text-gray-600 hover:underline">prochesta.mfi@gmail.com</a></p>
+                {donationDetails?.bankDetails ? (
+                  <div className="text-gray-600 font-mono text-[11px] whitespace-pre-line leading-relaxed pt-1">
+                    {donationDetails.bankDetails}
+                  </div>
+                ) : (
+                  <>
+                    <p className="text-gray-600">Prochesta Multipurpose Co-Operative Society Asom Ltd.</p>
+                    <p className="text-gray-600">Address: {contactInfo?.address?.replace(/\n/g, " ") || "2A, Sonadhar Senapati Path Silpukhuri Guwahati – 781003 Assam, India"}</p>
+                    <p className="text-gray-600">Phone: {contactInfo?.phoneNumbers?.join(" / ") || "03612963506 / 03612660020"}</p>
+                    <p className="text-gray-600">Email: {contactInfo?.emails?.join(" / ") || "prochesta@hotmail.com"}</p>
+                  </>
+                )}
               </div>
             </motion.div>)}
 

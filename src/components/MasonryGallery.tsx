@@ -2,7 +2,11 @@ import React, { useState } from "react";
 import { GALLERY_DATA } from "../data";
 import { ZoomIn, Tag, Facebook } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-export default function MasonryGallery() {
+interface MasonryGalleryProps {
+    gallery?: { id: string; title: string; category: string; image: string }[];
+}
+export default function MasonryGallery({ gallery }: MasonryGalleryProps) {
+    const activeGallery = gallery || GALLERY_DATA;
     const [selectedImage, setSelectedImage] = useState<any | null>(null);
     return (<section id="gallery" className="py-24 bg-[#FFF9FB] border-t border-[#D63384]/5 relative overflow-hidden">
       
@@ -34,7 +38,7 @@ export default function MasonryGallery() {
 
         
         <div className="columns-1 sm:columns-2 lg:columns-3 gap-6 space-y-6">
-          {GALLERY_DATA.map((img) => (<div key={img.id} onClick={() => setSelectedImage(img)} className="break-inside-avoid relative rounded-2xl overflow-hidden border border-gray-200 bg-white mb-6 p-4 flex flex-col group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
+          {activeGallery.map((img) => (<div key={img.id} onClick={() => setSelectedImage(img)} className="break-inside-avoid relative rounded-2xl overflow-hidden border border-gray-200 bg-white mb-6 p-4 flex flex-col group cursor-pointer transition-all duration-300 hover:-translate-y-1 hover:shadow-xl">
               
               <div className="relative w-full overflow-hidden rounded-xl bg-stone-50 mb-3 shadow-xs">
                 {img.image && (<img src={img.image} alt={img.title} referrerPolicy="no-referrer" className="w-full h-auto object-contain block select-none pointer-events-none transition-transform duration-500 group-hover:scale-[1.02]"/>)}

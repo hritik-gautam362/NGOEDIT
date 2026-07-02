@@ -49,8 +49,35 @@ const milestones = [
         dateDetail: "Sustainable Future"
     }
 ];
-export default function AboutUs() {
-    const [selectedMilestone, setSelectedMilestone] = useState<number>(milestones.length - 1);
+interface AboutUsProps {
+    aboutUs?: {
+        title: string;
+        subtitle: string;
+        content: string;
+        pledge: string;
+        founder: {
+            name: string;
+            years: string;
+            description: string;
+            quote: string;
+        };
+        milestones: {
+            year: string;
+            title: string;
+            description: string;
+            dateDetail?: string;
+        }[];
+        teamMembers: { id: string; name: string; role: string; initials: string; description?: string }[];
+        executives: { id: string; name: string; role: string; initials: string; description?: string }[];
+    };
+}
+export default function AboutUs({ aboutUs }: AboutUsProps) {
+    const activeMilestones = aboutUs?.milestones || milestones;
+    const [selectedMilestone, setSelectedMilestone] = useState<number>(() => activeMilestones.length - 1);
+    
+    useEffect(() => {
+        setSelectedMilestone(activeMilestones.length - 1);
+    }, [activeMilestones.length]);
     const [isFounderModalOpen, setIsFounderModalOpen] = useState(false);
     const [isBoardModalOpen, setIsBoardModalOpen] = useState(false);
     const [isAdvisoryModalOpen, setIsAdvisoryModalOpen] = useState(false);
@@ -108,33 +135,34 @@ export default function AboutUs() {
                   <span className="relative inline-flex rounded-full h-2 w-2 bg-[#D63384]"></span>
                 </div>
                 <span className="text-xs font-extrabold tracking-widest text-[#D63384] uppercase font-sans">
-                  ABOUT PROCHESTA
+                  {aboutUs?.subtitle || "ABOUT PROCHESTA"}
                 </span>
               </motion.div>
 
               
-              <motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-3xl sm:text-4xl lg:text-5xl font-black font-sans tracking-tight text-gray-950 leading-tight mb-8">
-                From Literacy To <span className="bg-gradient-to-r from-[#D63384] via-[#7C3AED] to-amber-500 bg-clip-text text-transparent">Lasting Change</span>
-              </motion.h2>
+              {(() => {
+                  const formatAboutTitle = (text: string) => {
+                      if (!text) return "";
+                      return text.replace(/Lasting Change/g, '<span class="bg-gradient-to-r from-[#D63384] via-[#7C3AED] to-amber-500 bg-clip-text text-transparent">Lasting Change</span>');
+                  };
+                  return (<motion.h2 initial={{ opacity: 0, y: 20 }} whileInView={{ opacity: 1, y: 0 }} viewport={{ once: true }} transition={{ duration: 0.7 }} className="text-3xl sm:text-4xl lg:text-5xl font-black font-sans tracking-tight text-gray-950 leading-tight mb-8" dangerouslySetInnerHTML={{ __html: formatAboutTitle(aboutUs?.title || "From Literacy To Lasting Change") }} />);
+              })()}
 
               
-              <motion.div variants={containerVariants} initial="hidden" whileInView="visible" viewport={{ once: true, margin: "-40px" }} className="space-y-5 font-sans text-gray-700 text-[14.5px] sm:text-[15.5px] leading-relaxed">
-                <motion.p variants={itemVariants} className="font-medium text-gray-900 leading-relaxed">
-                  The story of Prochesta began with a simple belief — when women are empowered with knowledge, entire communities move forward.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  In the late 1980s, literacy movements across Assam inspired local volunteers and learners, majority of whom were women eager to continue their journey beyond education. What started as a movement for learning soon became a movement for opportunity, self-reliance, and collective growth.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Through discussions, workshops, and community participation, women came together to form Self Help Groups (SHGs), creating a foundation for financial independence and social progress. These groups quickly spread across rural Assam, bringing people together through shared purpose and determination. It was named Prochesta - endeavour.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  In 1999, Prochesta was formally registered as a society, strengthening its mission to support women and communities through organized development initiatives. Over the years, the organization continued to grow, eventually becoming a registered cooperative in 2012.
-                </motion.p>
-                <motion.p variants={itemVariants}>
-                  Today, Prochesta continues to work alongside communities to promote financial inclusion, entrepreneurship and skill development, and creating sustainable opportunities for women across Assam.
-                </motion.p>
-              </motion.div>
+              <motion.div 
+                variants={containerVariants} 
+                initial="hidden" 
+                whileInView="visible" 
+                viewport={{ once: true, margin: "-40px" }} 
+                className="space-y-5 font-sans text-gray-700 text-[14.5px] sm:text-[15.5px] leading-relaxed"
+                dangerouslySetInnerHTML={{ __html: aboutUs?.content || `
+                  <p class="font-medium text-gray-900 leading-relaxed">The story of Prochesta began with a simple belief — when women are empowered with knowledge, entire communities move forward.</p>
+                  <p>In the late 1980s, literacy movements across Assam inspired local volunteers and learners, majority of whom were women eager to continue their journey beyond education. What started as a movement for learning soon became a movement for opportunity, self-reliance, and collective growth.</p>
+                  <p>Through discussions, workshops, and community participation, women came together to form Self Help Groups (SHGs), creating a foundation for financial independence and social progress. These groups quickly spread across rural Assam, bringing people together through shared purpose and determination. It was named Prochesta - endeavour.</p>
+                  <p>In 1999, Prochesta was formally registered as a society, strengthening its mission to support women and communities through organized development initiatives. Over the years, the organization continued to grow, eventually becoming a registered cooperative in 2012.</p>
+                  <p>Today, Prochesta continues to work alongside communities to promote financial inclusion, entrepreneurship and skill development, and creating sustainable opportunities for women across Assam.</p>
+                ` }}
+              />
             </div>
 
             
@@ -143,7 +171,7 @@ export default function AboutUs() {
               <Quote className="absolute top-4 left-4 w-12 h-12 text-pink-200/40 pointer-events-none"/>
               <div className="relative z-10 pl-6 border-l-3 border-gradient-[#D63384] border-[#D63384]">
                 <p className="text-gray-800 text-sm sm:text-base font-serif italic font-medium leading-relaxed">
-                  "Real change begins when women are given the opportunity to learn, lead, and create a better future."
+                  "{aboutUs?.pledge || "Real change begins when women are given the opportunity to learn, lead, and create a better future."}"
                 </p>
                 <div className="mt-3 flex items-center space-x-2">
                   <div className="w-5 h-[1px] bg-[#D63384]/50"/>
@@ -202,8 +230,17 @@ export default function AboutUs() {
         }} layout transition={{ type: "spring", stiffness: 70, damping: 15 }}/>
 
                 
-                {milestones.map((item, index) => {
-            const IconComponent = item.icon;
+                {activeMilestones.map((item, index) => {
+            const milestoneIcons = [BookOpen, Users2, ShieldCheck, Landmark, Heart];
+            const milestoneColors = [
+                "from-pink-500 to-rose-500",
+                "from-purple-500 to-indigo-500",
+                "from-teal-500 to-emerald-500",
+                "from-[#D63384] to-[#7C3AED]",
+                "from-amber-500 to-orange-500"
+            ];
+            const IconComponent = milestoneIcons[index] || Sparkles;
+            const color = milestoneColors[index] || "from-pink-500 to-rose-500";
             const isSelected = selectedMilestone === index;
             return (<motion.div key={index} onClick={() => setSelectedMilestone(index)} className="group cursor-pointer relative z-10" whileHover={{ x: 4 }} transition={{ duration: 0.2 }}>
                       <div className="flex items-start space-x-4">
@@ -213,7 +250,7 @@ export default function AboutUs() {
                           {isSelected && (<motion.span layoutId="timeline-halo" transition={{ type: "spring", stiffness: 100, damping: 12 }} className="absolute -inset-1.5 rounded-full bg-[#D63384]/15 filter blur-xs animate-pulse"/>)}
 
                           <div className={`w-12 h-12 rounded-full flex items-center justify-center border transition-all duration-300 ${isSelected
-                    ? `bg-gradient-to-tr ${item.color || "from-[#D63384] to-[#7C3AED]"} border-transparent text-white shadow-md`
+                    ? `bg-gradient-to-tr ${color} border-transparent text-white shadow-md`
                     : "bg-white border-gray-100 text-gray-400 group-hover:border-[#D63384]/30 group-hover:text-gray-700"}`}>
                             <IconComponent className="w-5 h-5"/>
                           </div>
@@ -225,8 +262,8 @@ export default function AboutUs() {
                             <span className={`text-[15px] font-black transition-colors ${isSelected ? "text-gray-950 font-black scale-102 transform origin-left" : "text-gray-400 group-hover:text-gray-600"}`}>
                               {item.year}
                             </span>
-                            {isSelected && (<motion.span initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-[10px] font-mono tracking-wide text-[#pink-600] text-[#D63384] bg-pink-50 border border-pink-100 rounded-full px-2">
-                                {item.dateDetail}
+                            {isSelected && (<motion.span initial={{ opacity: 0, x: -5 }} animate={{ opacity: 1, x: 0 }} className="text-[10px] font-mono tracking-wide text-[#D63384] bg-pink-50 border border-pink-100 rounded-full px-2">
+                                {item.dateDetail || item.year}
                               </motion.span>)}
                           </div>
                           
@@ -423,10 +460,10 @@ export default function AboutUs() {
                       
                       <div className="space-y-1.5 mt-2">
                         <h4 className="text-xl font-black font-sans tracking-tight text-white leading-tight">
-                          Dr. Debadatta Barkataki
+                          {aboutUs?.founder?.name || "Dr. Debadatta Barkataki"}
                         </h4>
                         <p className="text-[10px] font-mono text-amber-400 uppercase tracking-widest font-extrabold bg-white/5 border border-white/10 px-3 py-0.5 rounded-full w-fit mx-auto select-none">
-                          1937 — 2021
+                          {aboutUs?.founder?.years || "1937 — 2021"}
                         </p>
                         <p className="text-[12.5px] text-gray-300 font-sans max-w-xs mx-auto leading-relaxed mt-2 font-medium">
                           Chemistry educator, social visionary, and community architect.
@@ -470,25 +507,27 @@ export default function AboutUs() {
                     <h3 className="text-xl md:text-2xl font-black font-sans text-gray-950 tracking-tight mb-2">
                       The Visionary Behind Prochesta
                     </h3>
-                    <p className="text-gray-900 font-bold border-l-3 border-[#D63384] pl-5 italic leading-relaxed text-sm sm:text-[15px]">
-                      No organization is built by one individual alone. It grows through the dedication, support, and shared efforts of many people who believe in a common purpose. Prochesta is no exception. From its earliest days, the organization was strengthened by a network of committed individuals who contributed their time, knowledge, and encouragement. Their support remains an important part of Prochesta's journey, and the organization continues to honor their contributions with gratitude.
-                    </p>
-                    
-                    <p>
-                      At the heart of this journey was Dr. Debadatta Barkataki, the visionary who first conceptualized the idea of Prochesta. While serving as a Chemistry teacher at B. Borooah College, he was actively involved with various social organizations and played a significant role in literacy movements both within Assam and across India.
-                    </p>
-                    
-                    <p>
-                      Recognizing the need for sustainable community development and women-led collective action, he worked alongside like-minded individuals to shape the foundation of what would eventually become Prochesta. Through determination, leadership, and a commitment to social progress, he helped establish an organization that continues to create positive change today.
-                    </p>
-                    
-                    <p>
-                      Dr. Debadatta Barkataki served as the Founder Executive Director of Prochesta and later continued to guide the organization as an advisor. His contributions, leadership, and vision remain an enduring part of Prochesta's identity.
-                    </p>
+                    <div 
+                      className="space-y-4 prose prose-sm max-w-none"
+                      dangerouslySetInnerHTML={{ __html: aboutUs?.founder?.description || `
+                        <p class="text-gray-900 font-bold border-l-3 border-[#D63384] pl-5 italic leading-relaxed text-sm sm:text-[15px]">
+                          No organization is built by one individual alone. It grows through the dedication, support, and shared efforts of many people who believe in a common purpose. Prochesta is no exception. From its earliest days, the organization was strengthened by a network of committed individuals who contributed their time, knowledge, and encouragement. Their support remains an important part of Prochesta's journey, and the organization continues to honor their contributions with gratitude.
+                        </p>
+                        <p>
+                          At the heart of this journey was Dr. Debadatta Barkataki, the visionary who first conceptualized the idea of Prochesta. While serving as a Chemistry teacher at B. Borooah College, he was actively involved with various social organizations and played a significant role in literacy movements both within Assam and across India.
+                        </p>
+                        <p>
+                          Recognizing the need for sustainable community development and women-led collective action, he worked alongside like-minded individuals to shape the foundation of what would eventually become Prochesta. Through determination, leadership, and a commitment to social progress, he helped establish an organization that continues to create positive change today.
+                        </p>
+                        <p>
+                          Dr. Debadatta Barkataki served as the Founder Executive Director of Prochesta and later continued to guide the organization as an advisor. His contributions, leadership, and vision remain an enduring part of Prochesta's identity.
+                        </p>
+                      ` }}
+                    />
                     
                     <p className="text-[#D63384] font-extrabold text-xs font-mono uppercase tracking-wider flex items-center space-x-2 pt-2">
                       <span className="w-2 h-2 rounded-full bg-[#D63384] animate-ping shrink-0"/>
-                      <span>The organization deeply remembers and honors his legacy following his passing on 23 November 2021.</span>
+                      <span>The organization deeply remembers and honors his legacy following his passing on {aboutUs?.founder?.deathDate || "23 November 2021"}.</span>
                     </p>
                   </div>
 
@@ -499,7 +538,7 @@ export default function AboutUs() {
 
                     <div className="relative z-10 space-y-3">
                       <p className="text-gray-950 font-serif italic text-sm sm:text-base opacity-95 leading-relaxed pr-6">
-                        "Great institutions begin with a vision, but they endure because that vision inspires others to carry it forward."
+                        "{aboutUs?.founder?.quote || "Great institutions begin with a vision, but they endure because that vision inspires others to carry it forward."}"
                       </p>
                       
                       
@@ -582,98 +621,22 @@ export default function AboutUs() {
 
               
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                {[
-                {
-                    name: "Ms Madhobi Medhi",
-                    role: "Chairperson",
-                    initials: "M.M",
-                    // description: "Leading intellectual and social advocate shaping Prochesta's macro-governance, institutional compliance, and ethical mandate structures."
-                },
-                {
-                    name: "Dr. Anjana Borkakati",
-                    role: "Executive Director",
-                    initials: "A.B",
-                    // description: "Chief operational director steering program execution, donor relationships, self-help-group networks, and academic-grassroots translation modules."
-                },
-                {
-                    name: "Mr. Subhan Bora",
-                    role: "Managing Director (Ex Officio Member)",
-                    initials: "S.B",
-                    // description: "Administrative registrar coordinating external department clearances, structural auditing mandates, and active cooperative oversight models."
-                },
-                {
-                    name: "Mr. Ranjit Sarma",
-                    role: "Director Administration",
-                    initials: "R.S",
-                    // description: "Supervising internal logistics, physical workspace systems, financial records validation, and regional branch operations connectivity."
-                },
-                {
-                    name: "Mr. Tapan Kr. Sarma",
-                    role: "Director (Member)",
-                    initials: "T.S",
-                    // description: "Coordinating executive communications, public welfare linkages, field deployment strategies, and general assembly voting consensus."
-                },
-                {
-                    name: "Mr. Jamini Ranjan Das",
-                    role: "Director (Member)",
-                    initials: "J.D",
-                    // description: "Directing weaver guild alliances, physical material logistics, and grassroots cluster development initiatives."
-                },
-                {
-                    name: "Mrs. Sushnata Goswami",
-                    role: "Director (Member)",
-                    initials: "S.G",
-                    // description: "Dedicated welfare leader coordinating regional women-empowerment cooperatives and village community networks."
-                },
-                {
-                    name: "Mr. Dwipendra Kr. Sharma",
-                    role: "Director (Member)",
-                    initials: "D.S",
-                    // description: "Managing regional stakeholder communications, local micro-credit outreach campaigns, and compliance audit alignment with cooperative rules."
-                },
-                // {
-                //     name: "Mr. Hiranya Bhattacharya",
-                //     role: "Director (Member)",
-                //     initials: "H.B",
-                //     description: "Providing legal guidance and administrative strategy support for grassroots cooperative federation activities."
-                // },
-                {
-                    name: "Mr. Munindra Kakati",
-                    role: "Director (Member)",
-                    initials: "M.K",
-                    // description: "Advising on market integration, digital training workshops, and cooperative weavers' financial accessibility structures."
-                },
-                {
-                    name: "Mr. Paresh Dev Choudhury",
-                    role: "Director (Member)",
-                    initials: "P.C",
-                    // description: "Supervising field research outreach, demographic data classification, and community developmental program reviews."
-                },
-                {
-                    name: "Mr. Balen Choudhury",
-                    role: "Director (Member)",
-                    initials: "B.C",
-                    // description: "Structuring logistics, artisan tools distribution pipelines, and workshop facilities coordination across rural zones."
-                },
-                {
-                    name: "Mr. Kusum Sarma",
-                    role: "Director (Member)",
-                    initials: "K.S",
-                    // description: "Coordinating development funds allocation, field audits, and primary relations with state-level cooperative agencies."
-                },
-                {
-                    name: "Ms Kalpana Goswami",
-                    role: "Director (Member)",
-                    initials: "K.G",
-                    // description: "Focusing on women empowerment programs, craft design innovations, and micro-entrepreneurship incubation networks."
-                },
-                {
-                    name: "Mrs. Labanya Das",
-                    role: "Director (Member)",
-                    initials: "L.D",
-                    // description: "Mobilizing local weaver self-help cliques, raw materials distribution, and on-ground welfare support models."
-                }
-            ].map((member, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.015 }} whileHover={{ scale: 1.01, y: -2 }} className="p-5 rounded-[20px] bg-white border border-slate-200/80 hover:border-[#D63384]/30 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(214,51,132,0.04)] flex items-start space-x-3.5 transition-all duration-300">
+                {(aboutUs?.teamMembers || [
+                { name: "Ms Madhobi Medhi", role: "Chairperson", initials: "M.M" },
+                { name: "Dr. Anjana Borkakati", role: "Executive Director", initials: "A.B" },
+                { name: "Mr. Subhan Bora", role: "Managing Director (Ex Officio Member)", initials: "S.B" },
+                { name: "Mr. Ranjit Sarma", role: "Director Administration", initials: "R.S" },
+                { name: "Mr. Tapan Kr. Sarma", role: "Director (Member)", initials: "T.S" },
+                { name: "Mr. Jamini Ranjan Das", role: "Director (Member)", initials: "J.D" },
+                { name: "Mrs. Sushnata Goswami", role: "Director (Member)", initials: "S.G" },
+                { name: "Mr. Dwipendra Kr. Sharma", role: "Director (Member)", initials: "D.S" },
+                { name: "Mr. Munindra Kakati", role: "Director (Member)", initials: "M.K" },
+                { name: "Mr. Paresh Dev Choudhury", role: "Director (Member)", initials: "P.C" },
+                { name: "Mr. Balen Choudhury", role: "Director (Member)", initials: "B.C" },
+                { name: "Mr. Kusum Sarma", role: "Director (Member)", initials: "K.S" },
+                { name: "Ms Kalpana Goswami", role: "Director (Member)", initials: "K.G" },
+                { name: "Mrs. Labanya Das", role: "Director (Member)", initials: "L.D" }
+            ]).map((member: any, i: number) => (<motion.div key={member.id || i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.015 }} whileHover={{ scale: 1.01, y: -2 }} className="p-5 rounded-[20px] bg-white border border-slate-200/80 hover:border-[#D63384]/30 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(214,51,132,0.04)] flex items-start space-x-3.5 transition-all duration-300">
                     
                     <div className="w-11 h-11 rounded-full shrink-0 flex items-center justify-center text-white bg-gradient-to-tr from-[#D63384] to-[#7C3AED] font-black text-xs shadow-sm">
                       {member.initials}
@@ -689,7 +652,7 @@ export default function AboutUs() {
                         </span>
                       </div>
                       <p className="text-[11.5px] text-slate-500 font-sans font-light leading-relaxed pt-1.5 border-t border-slate-100">
-                        {member.description}
+                        {member.description || "Active Director supporting co-operative initiatives."}
                       </p>
                     </div>
                   </motion.div>))}
@@ -760,38 +723,13 @@ export default function AboutUs() {
 
               
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                {[
-                {
-                    name: "Ms Madhobi Medhi",
-                    role: "Chairperson",
-                    initials: "M.M",
-                    // description: "Leading intellectual and social advocate shaping Prochesta's macro-governance, institutional compliance, and ethical mandate structures."
-                },
-                {
-                    name: "Dr. Anjana Borkakati",
-                    role: "Executive Director",
-                    initials: "A.B",
-                    // description: "Chief operational director steering program execution, donor relationships, self-help-group networks, and academic-grassroots translation modules."
-                },
-                {
-                    name: "Mr. Subhan Bora",
-                    role: "Managing Director (Ex Officio Member)",
-                    initials: "S.B",
-                    // description: "Administrative registrar coordinating external department clearances, structural auditing mandates, and active cooperative oversight models."
-                },
-                {
-                    name: "Mr. Ranjit Sarma",
-                    role: "Director Administration",
-                    initials: "R.S",
-                    // description: "Supervising internal logistics, physical workspace systems, financial records validation, and regional branch operations connectivity."
-                },
-                {
-                    name: "Mr. Tapan Kr. Sarma",
-                    role: "Director (Member)",
-                    initials: "T.S",
-                    // description: "Coordinating executive communications, public welfare linkages, field deployment strategies, and general assembly voting consensus."
-                }
-            ].map((member, i) => (<motion.div key={i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02 }} whileHover={{ scale: 1.01, y: -2 }} className="p-5 rounded-[20px] bg-white border border-slate-200/80 hover:border-[#7C3AED]/30 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(124,58,237,0.04)] flex items-start space-x-3.5 transition-all duration-300">
+                {(aboutUs?.executives || [
+                { name: "Ms Madhobi Medhi", role: "Chairperson", initials: "M.M" },
+                { name: "Dr. Anjana Borkakati", role: "Executive Director", initials: "A.B" },
+                { name: "Mr. Subhan Bora", role: "Managing Director (Ex Officio Member)", initials: "S.B" },
+                { name: "Mr. Ranjit Sarma", role: "Director Administration", initials: "R.S" },
+                { name: "Advocate Kusum Sarma", role: "Legal Advisor (Gauhati High Court)", initials: "K.S" }
+            ]).map((member: any, i: number) => (<motion.div key={member.id || i} initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: i * 0.02 }} whileHover={{ scale: 1.01, y: -2 }} className="p-5 rounded-[20px] bg-white border border-slate-200/80 hover:border-[#7C3AED]/30 shadow-[0_2px_8px_rgba(0,0,0,0.02)] hover:shadow-[0_12px_24px_rgba(124,58,237,0.04)] flex items-start space-x-3.5 transition-all duration-300">
                     
                     <div className="w-11 h-11 rounded-full shrink-0 flex items-center justify-center text-white bg-gradient-to-tr from-[#D63384] to-[#7C3AED] font-black text-xs shadow-sm">
                       {member.initials}
@@ -807,7 +745,7 @@ export default function AboutUs() {
                         </span>
                       </div>
                       <p className="text-[11.5px] text-slate-500 font-sans font-light leading-relaxed pt-1.5 border-t border-slate-100">
-                        {member.description}
+                        {member.description || "Executive officer driving co-operative mandate."}
                       </p>
                     </div>
                   </motion.div>))}

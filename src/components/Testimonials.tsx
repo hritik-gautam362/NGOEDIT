@@ -1,10 +1,18 @@
 import React, { useState } from "react";
 import { Landmark, HeartHandshake, GraduationCap, Scale, CheckCircle2, Star, Shield, HelpCircle, Sparkles } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-export default function Testimonials() {
+interface TestimonialsProps {
+    partners?: {
+        funders: string[];
+        financial: string[];
+        academic: string[];
+        legal: string[];
+    };
+}
+export default function Testimonials({ partners }: TestimonialsProps) {
     const [hoveredCard, setHoveredCard] = useState<string | null>(null);
     const [searchTerm, setSearchTerm] = useState("");
-    const partners = [
+    const categories = [
         {
             id: "funders",
             title: "Funders",
@@ -17,7 +25,7 @@ export default function Testimonials() {
             bgBadge: "bg-indigo-950/50 border border-indigo-500/20",
             badgeText: "text-indigo-300",
             icon: Landmark,
-            items: [
+            items: partners?.funders || [
                 "Rashtriya Mahila Kosh, New Delhi",
                 "National Housing Bank, New Delhi",
                 "Assam Cooperative Apex Bank Ltd.",
@@ -40,7 +48,7 @@ export default function Testimonials() {
             bgBadge: "bg-purple-950/50 border border-purple-500/20",
             badgeText: "text-purple-300",
             icon: HeartHandshake,
-            items: [
+            items: partners?.financial || [
                 "Rashtriya Mahila Kosh, New Delhi",
                 "NABARD, Guwahati",
                 "SIDBI, Guwahati",
@@ -59,7 +67,7 @@ export default function Testimonials() {
             bgBadge: "bg-violet-950/50 border border-violet-500/20",
             badgeText: "text-violet-300",
             icon: GraduationCap,
-            items: [
+            items: partners?.academic || [
                 "Sa-Dhan, New Delhi (SRO, RBI)",
                 "Rashtriya Mahila Kosh, New Delhi",
                 "FWWB",
@@ -80,7 +88,7 @@ export default function Testimonials() {
             bgBadge: "bg-blue-950/50 border border-blue-500/20",
             badgeText: "text-blue-300",
             icon: Scale,
-            items: [
+            items: partners?.legal || [
                 "Sa-Dhan, New Delhi",
                 "Registrar of Co-operative Societies, Guwahati",
                 "Ranjan Baishya & Co.",
@@ -88,7 +96,7 @@ export default function Testimonials() {
             ]
         }
     ];
-    const filteredPartners = partners.map(category => {
+    const filteredPartners = categories.map(category => {
         const matchedItems = category.items.filter(item => item.toLowerCase().includes(searchTerm.toLowerCase()));
         return {
             ...category,

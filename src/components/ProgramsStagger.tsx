@@ -1,7 +1,15 @@
 import React from "react";
 import { Calendar, Award, Users, CheckCircle2, Star, Flame } from "lucide-react";
 import { motion } from "motion/react";
-export default function ProgramsStagger() {
+interface ProgramsStaggerProps {
+    events?: {
+        agmTitle: string;
+        agmContent: string;
+        ashokSaikiaTitle: string;
+        ashokSaikiaContent: string;
+    };
+}
+export default function ProgramsStagger({ events }: ProgramsStaggerProps) {
     return (<section id="verticals" className="py-24 bg-gradient-to-b from-[#FFF9FB] via-white to-[#FFF9FB] border-t border-[#D63384]/5 relative overflow-hidden">
       
       <div className="absolute top-1/4 left-0 w-[450px] h-[450px] bg-gradient-to-tr from-amber-500/5 to-transparent rounded-full filter blur-[120px] pointer-events-none -translate-x-32"/>
@@ -47,19 +55,23 @@ export default function ProgramsStagger() {
               </div>
 
               
+              
               <h3 className="text-2xl sm:text-3xl font-black font-sans text-gray-950 tracking-tight leading-tight">
-                Annual General Meeting
+                {events?.agmTitle || "Annual General Meeting"}
               </h3>
 
               
-              <div className="space-y-4 text-gray-700 text-sm sm:text-[15px] font-sans leading-relaxed">
-                <p>
-                  Prochesta organises its Annual General Meeting each year during the month of September. This is the forum where all members meet annually and share their feelings. This is the forum where clients can meet all Board of Directors directly along with observer from Co-operative Department, stake holders and media persons.
-                </p>
-                <p>
-                  Proceedings of previous year's meeting along with audited balance sheet is approved in the meeting. Activities of previous year is discussed and projection for next year is passed in the meeting. Ashok Saikia Award for the best entrepreneur is awarded in this meeting.
-                </p>
-              </div>
+              <div 
+                className="space-y-4 text-gray-700 text-sm sm:text-[15px] font-sans leading-relaxed prose prose-sm max-w-none font-light"
+                dangerouslySetInnerHTML={{ __html: events?.agmContent || `
+                  <p>
+                    Prochesta organises its Annual General Meeting each year during the month of September. This is the forum where all members meet annually and share their feelings. This is the forum where clients can meet all Board of Directors directly along with observer from Co-operative Department, stake holders and media persons.
+                  </p>
+                  <p>
+                    Proceedings of previous year's meeting along with audited balance sheet is approved in the meeting. Activities of previous year is discussed and projection for next year is passed in the meeting. Ashok Saikia Award for the best entrepreneur is awarded in this meeting.
+                  </p>
+                ` }}
+              />
 
               
               <div className="space-y-2.5 pt-4">
@@ -103,28 +115,29 @@ export default function ProgramsStagger() {
               </div>
 
               
+              
               <h3 className="text-2xl sm:text-3xl font-black font-sans text-gray-950 tracking-tight leading-tight">
-                Ashok Saikia Award
+                {events?.ashokSaikiaTitle || "Ashok Saikia Award"}
               </h3>
 
               
-              <div className="space-y-4 text-gray-700 text-sm sm:text-[14.5px] font-sans leading-relaxed">
-                <p className="font-semibold text-indigo-950 border-l-3 border-indigo-500 pl-4 italic">
-                  Since 2013 Prochesta has started awarding the best women entrepreneur of the year in the name of Late Ashok Saikia. Ashok Saikia was 1971 batch IAS officer of the Assam-Meghalaya cadre.
-                </p>
-
-                <p>
-                  Ashok Saikia was a key pointsman in the Prime Minister's Office when Atal Bihari Vajpayee was in charge. He was additional secretary in the PMO, in charge of education, agriculture, and the tricky but all-important task of handling bureaucratic appointments and transfers.
-                </p>
-
-                <div className="p-4 rounded-2xl bg-indigo-50 border border-indigo-150 text-indigo-950 font-serif italic text-sm leading-relaxed">
-                  "Because of his honest, no-nonsense approach, Saikia was referred to by many colleagues as the prime minister's conscience keeper."
-                </div>
-
-                <p>
-                  Late Ashok Saikia was the initiator and helped Prochesta to grow as a self successful organization. To keep his memory alive we started this Ashok Saikia Award.
-                </p>
-              </div>
+              <div 
+                className="space-y-4 text-gray-700 text-sm sm:text-[14.5px] font-sans leading-relaxed prose prose-sm max-w-none font-light"
+                dangerouslySetInnerHTML={{ __html: events?.ashokSaikiaContent || `
+                  <p class="font-semibold text-indigo-950 border-l-3 border-indigo-500 pl-4 italic">
+                    Since 2013 Prochesta has started awarding the best women entrepreneur of the year in the name of Late Ashok Saikia. Ashok Saikia was 1971 batch IAS officer of the Assam-Meghalaya cadre.
+                  </p>
+                  <p>
+                    Ashok Saikia was a key pointsman in the Prime Minister's Office when Atal Bihari Vajpayee was in charge. He was additional secretary in the PMO, in charge of education, agriculture, and the tricky but all-important task of handling bureaucratic appointments and transfers.
+                  </p>
+                  <div class="p-4 rounded-2xl bg-indigo-50 border border-indigo-150 text-indigo-950 font-serif italic text-sm leading-relaxed">
+                    "Because of his honest, no-nonsense approach, Saikia was referred to by many colleagues as the prime minister's conscience keeper."
+                  </div>
+                  <p>
+                    Late Ashok Saikia was the initiator and helped Prochesta to grow as a self successful organization. To keep his memory alive we started this Ashok Saikia Award.
+                  </p>
+                ` }}
+              />
             </div>
 
             

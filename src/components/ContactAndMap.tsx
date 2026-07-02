@@ -1,7 +1,16 @@
 import React, { useState } from "react";
 import { Phone, Mail, MapPin, Compass, Send, CheckCircle2, MessageSquare, ExternalLink, X, Building, Tag, Facebook, Linkedin } from "lucide-react";
 import { motion, AnimatePresence } from "motion/react";
-export default function ContactAndMap() {
+interface ContactAndMapProps {
+    contactInfo?: {
+        address: string;
+        phoneNumbers: string[];
+        emails: string[];
+        facebookUrl: string;
+        linkedinUrl: string;
+    };
+}
+export default function ContactAndMap({ contactInfo }: ContactAndMapProps) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [msg, setMsg] = useState("");
@@ -104,10 +113,7 @@ export default function ContactAndMap() {
                     Prochesta Multipurpose Co-Operative Society Asom Ltd.
                   </p>
                   <p className="text-xs text-gray-650 leading-relaxed whitespace-pre-line font-sans">
-                    2A, Sonadhar Senapati Path
-                    Silpukhuri
-                    Guwahati – 781003
-                    Assam, India
+                    {contactInfo?.address || `2A, Sonadhar Senapati Path\nSilpukhuri\nGuwahati – 781003\nAssam, India`}
                   </p>
                 </div>
               </div>
@@ -119,8 +125,11 @@ export default function ContactAndMap() {
                 <div className="space-y-1 w-full text-left">
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest font-mono">☎ Our Phone No.</h4>
                   <div className="flex flex-col sm:flex-row justify-between text-xs font-bold font-mono text-gray-800 gap-2 mt-1">
-                    <div>📞 03612963506</div>
-                    {/* <div>📞 03612660020</div> */}
+                    {contactInfo?.phoneNumbers && contactInfo.phoneNumbers.length > 0 ? (
+                        contactInfo.phoneNumbers.map(phone => <div key={phone}>📞 {phone}</div>)
+                    ) : (
+                        <div>📞 03612963506 / 2660020</div>
+                    )}
                   </div>
                 </div>
               </div>
@@ -131,9 +140,17 @@ export default function ContactAndMap() {
                 </div>
                 <div className="space-y-1 w-full text-left">
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest font-mono">✉ Our Email</h4>
-                  <div className="flex flex-col sm:flex-row justify-between text-xs font-bold font-mono text-[#D63384] gap-2 overflow-hidden mt-1">
-                    <a href="mailto:prochesta@hotmail.com" className="hover:underline truncate">prochesta@hotmail.com</a>
-                    <a href="mailto:prochesta.mfi@gmail.com" className="hover:underline text-[#7C3AED] truncate">prochesta.mfi@gmail.com</a>
+                  <div className="flex flex-col sm:flex-row justify-between text-xs font-bold font-mono text-[#D63384] gap-2 overflow-hidden mt-1 font-sans">
+                    {contactInfo?.emails && contactInfo.emails.length > 0 ? (
+                        contactInfo.emails.map((email, idx) => (
+                            <a key={email} href={`mailto:${email}`} className={`hover:underline truncate ${idx > 0 ? "text-[#7C3AED]" : ""}`}>{email}</a>
+                        ))
+                    ) : (
+                        <>
+                            <a href="mailto:prochesta@hotmail.com" className="hover:underline truncate">prochesta@hotmail.com</a>
+                            <a href="mailto:prochesta.mfi@gmail.com" className="hover:underline text-[#7C3AED] truncate">prochesta.mfi@gmail.com</a>
+                        </>
+                    )}
                   </div>
                 </div>
               </div>
@@ -145,11 +162,11 @@ export default function ContactAndMap() {
                 <div className="space-y-1 w-full text-left">
                   <h4 className="text-xs font-bold text-gray-400 uppercase tracking-widest font-mono">🌐 Social Media Connect</h4>
                   <div className="flex flex-col sm:flex-row justify-start text-xs font-bold text-gray-800 gap-4 mt-1.5 font-sans">
-                    <a href="https://www.facebook.com/prochesta.mfi" target="_blank" rel="noreferrer" className="hover:text-[#D63384] md:hover:scale-105 transition duration-300 flex items-center space-x-1.5">
+                    <a href={contactInfo?.facebookUrl || "https://www.facebook.com/prochesta.mfi"} target="_blank" rel="noreferrer" className="hover:text-[#D63384] md:hover:scale-105 transition duration-300 flex items-center space-x-1.5">
                       <Facebook className="w-4 h-4 text-blue-600 fill-blue-600/10"/>
                       <span>Facebook</span>
                     </a>
-                    <a href="https://www.linkedin.com/in/prochesta-multipurpose-co-operative-society-asom-ltd-guwahati/" target="_blank" rel="noreferrer" className="hover:text-[#7C3AED] md:hover:scale-105 transition duration-300 flex items-center space-x-1.5">
+                    <a href={contactInfo?.linkedinUrl || "https://www.linkedin.com/in/prochesta-multipurpose-co-operative-society-asom-ltd-guwahati/"} target="_blank" rel="noreferrer" className="hover:text-[#7C3AED] md:hover:scale-105 transition duration-300 flex items-center space-x-1.5">
                       <Linkedin className="w-4 h-4 text-blue-800 fill-blue-800/10"/>
                       <span>LinkedIn</span>
                     </a>

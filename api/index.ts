@@ -94,6 +94,7 @@ interface DatabaseSchema {
     donations: DonationRecord[];
     inquiries?: ContactInquiry[];
     adminPin?: string;
+    siteContent?: any;
 }
 const initialDatabase: DatabaseSchema = {
     volunteers: [],
@@ -616,11 +617,18 @@ app.post("/api/admin/change-pin", async (req, res) => {
 app.get("/api/public/stats", async (req, res) => {
     try {
         const db = await readDB();
-        const volunteerCount = 22450 + db.volunteers.length;
-        const internCount = 3850 + db.internships.filter(i => i.type === "internship").length;
-        const enrollmentCount = 35000 + db.internships.filter(i => i.type === "enrollment").length;
-        const totalRaised = 84000000 + db.donations.reduce((sum, d) => sum + d.amount, 0);
-        const donationCount = 1450 + db.donations.length;
+        const baseStats = db.siteContent?.hero?.stats || {
+            volunteerCount: 22450,
+            internCount: 3850,
+            enrollmentCount: 35000,
+            totalRaised: 84000000,
+            donationCount: 1450
+        };
+        const volunteerCount = baseStats.volunteerCount + db.volunteers.length;
+        const internCount = baseStats.internCount + db.internships.filter(i => i.type === "internship").length;
+        const enrollmentCount = baseStats.enrollmentCount + db.internships.filter(i => i.type === "enrollment").length;
+        const totalRaised = baseStats.totalRaised + db.donations.reduce((sum, d) => sum + d.amount, 0);
+        const donationCount = baseStats.donationCount + db.donations.length;
         res.json({
             volunteerCount,
             internCount,
@@ -628,6 +636,48 @@ app.get("/api/public/stats", async (req, res) => {
             totalRaised,
             donationCount
         });
+    }
+    catch (err: any) {
+        res.status(500).json({ error: "Internal server error: " + err.message });
+    }
+});
+app.get("/api/public/content", async (req, res) => {
+    try {
+        const db = await readDB();
+        res.json(db.siteContent || {});
+    }
+    catch (err: any) {
+        res.status(500).json({ error: "Internal server error: " + err.message });
+    }
+});
+app.post("/api/admin/content", async (req, res) => {
+    try {
+        const db = await readDB();
+        if (!hasAdminAuthorization(req, db)) {
+            return res.status(401).json({ error: "Unauthorized access: Invalid or missing administrator PIN." });
+        }
+        db.siteContent = req.body;
+        await writeDB(db);
+        res.json({ success: true, message: "Website content updated successfully." });
+    }
+    catch (err: any) {
+        res.status(500).json({ error: "Internal server error: " + err.message });
+    }
+});
+app.get("/api/public/documents/:id", async (req, res) => {
+    try {
+        const { id } = req.params;
+        const db = await readDB();
+        const doc = db.siteContent?.documents?.find((d: any) => d.id === id);
+        if (!doc) {
+            return res.status(404).json({ error: "Document not found." });
+        }
+        const parts = doc.data.split(",");
+        const base64Data = parts[1] || parts[0];
+        const buffer = Buffer.from(base64Data, "base64");
+        res.setHeader("Content-Type", doc.type || "application/octet-stream");
+        res.setHeader("Content-Disposition", `inline; filename="${doc.name}"`);
+        res.send(buffer);
     }
     catch (err: any) {
         res.status(500).json({ error: "Internal server error: " + err.message });
