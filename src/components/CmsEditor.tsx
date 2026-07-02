@@ -455,56 +455,92 @@ export default function CmsEditor({ content, onSave, onResetDefaults }: CmsEdito
                                 </div>
 
                                 <div className="border-t border-gray-100 pt-4 mt-4 space-y-3">
-                                    <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1 mb-2 font-sans">
-                                        Interactive Timeline Milestones
-                                    </span>
-                                    {draft.aboutUs.milestones.map((milestone, idx) => (
-                                        <div key={idx} className="p-3 bg-gray-50 rounded-xl border border-gray-200 grid grid-cols-1 sm:grid-cols-4 gap-3 items-center">
-                                            <div>
-                                                <label className="block text-[8px] font-bold text-gray-400 uppercase">Year Badge</label>
-                                                <input
-                                                    type="text"
-                                                    disabled={!editMode}
-                                                    value={milestone.year}
-                                                    onChange={(e) => {
-                                                        const updatedList = [...draft.aboutUs.milestones];
-                                                        updatedList[idx].year = e.target.value;
-                                                        updatedList[idx].title = e.target.value;
-                                                        updateField("aboutUs", "milestones", updatedList);
-                                                    }}
-                                                    className="w-full px-2 py-1 text-xs border rounded-lg bg-white disabled:opacity-70"
-                                                />
+                                    <div className="flex justify-between items-center mb-2">
+                                        <span className="block text-[10px] font-bold text-gray-400 uppercase tracking-widest pl-1 font-sans">
+                                            Interactive Timeline Milestones
+                                        </span>
+                                        {editMode && (
+                                            <button
+                                                onClick={() => {
+                                                    const newMilestone = {
+                                                        year: "New Year",
+                                                        title: "New Year",
+                                                        description: "Write description of milestones here...",
+                                                        dateDetail: "Milestone detail..."
+                                                    };
+                                                    updateField("aboutUs", "milestones", [...draft.aboutUs.milestones, newMilestone]);
+                                                }}
+                                                className="px-2.5 py-1 text-[9px] font-bold bg-[#7C3AED] hover:bg-[#682ecf] text-white rounded-lg flex items-center space-x-1 cursor-pointer border-0"
+                                            >
+                                                <Plus className="w-3 h-3" />
+                                                <span>Add Milestone</span>
+                                            </button>
+                                        )}
+                                    </div>
+                                    <div className="space-y-3">
+                                        {draft.aboutUs.milestones.map((milestone, idx) => (
+                                            <div key={idx} className="p-3 bg-gray-50 rounded-xl border border-gray-200 flex items-center gap-3 justify-between">
+                                                <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 flex-1">
+                                                    <div>
+                                                        <label className="block text-[8px] font-bold text-gray-400 uppercase">Year Badge</label>
+                                                        <input
+                                                            type="text"
+                                                            disabled={!editMode}
+                                                            value={milestone.year}
+                                                            onChange={(e) => {
+                                                                const updatedList = [...draft.aboutUs.milestones];
+                                                                updatedList[idx].year = e.target.value;
+                                                                updatedList[idx].title = e.target.value;
+                                                                updateField("aboutUs", "milestones", updatedList);
+                                                            }}
+                                                            className="w-full px-2 py-1 text-xs border rounded-lg bg-white disabled:opacity-70"
+                                                        />
+                                                    </div>
+                                                    <div>
+                                                        <label className="block text-[8px] font-bold text-gray-400 uppercase">Date Detail Header</label>
+                                                        <input
+                                                            type="text"
+                                                            disabled={!editMode}
+                                                            value={milestone.dateDetail || ""}
+                                                            onChange={(e) => {
+                                                                const updatedList = [...draft.aboutUs.milestones];
+                                                                updatedList[idx].dateDetail = e.target.value;
+                                                                updateField("aboutUs", "milestones", updatedList);
+                                                            }}
+                                                            className="w-full px-2 py-1 text-xs border rounded-lg bg-white disabled:opacity-70"
+                                                        />
+                                                    </div>
+                                                    <div className="sm:col-span-2">
+                                                        <label className="block text-[8px] font-bold text-gray-400 uppercase">Description</label>
+                                                        <input
+                                                            type="text"
+                                                            disabled={!editMode}
+                                                            value={milestone.description}
+                                                            onChange={(e) => {
+                                                                const updatedList = [...draft.aboutUs.milestones];
+                                                                updatedList[idx].description = e.target.value;
+                                                                updateField("aboutUs", "milestones", updatedList);
+                                                            }}
+                                                            className="w-full px-2 py-1 text-xs border rounded-lg bg-white disabled:opacity-70"
+                                                        />
+                                                    </div>
+                                                </div>
+                                                
+                                                {editMode && (
+                                                    <button
+                                                        onClick={() => {
+                                                            const updatedList = draft.aboutUs.milestones.filter((_, i) => i !== idx);
+                                                            updateField("aboutUs", "milestones", updatedList);
+                                                        }}
+                                                        className="p-1.5 text-gray-400 hover:text-red-500 rounded-lg hover:bg-gray-200 shrink-0 cursor-pointer border-0 bg-transparent"
+                                                        title="Delete Milestone"
+                                                    >
+                                                        <Trash2 className="w-4 h-4" />
+                                                    </button>
+                                                )}
                                             </div>
-                                            <div>
-                                                <label className="block text-[8px] font-bold text-gray-400 uppercase">Date Detail Header</label>
-                                                <input
-                                                    type="text"
-                                                    disabled={!editMode}
-                                                    value={milestone.dateDetail || ""}
-                                                    onChange={(e) => {
-                                                        const updatedList = [...draft.aboutUs.milestones];
-                                                        updatedList[idx].dateDetail = e.target.value;
-                                                        updateField("aboutUs", "milestones", updatedList);
-                                                    }}
-                                                    className="w-full px-2 py-1 text-xs border rounded-lg bg-white disabled:opacity-70"
-                                                />
-                                            </div>
-                                            <div className="sm:col-span-2">
-                                                <label className="block text-[8px] font-bold text-gray-400 uppercase">Description</label>
-                                                <input
-                                                    type="text"
-                                                    disabled={!editMode}
-                                                    value={milestone.description}
-                                                    onChange={(e) => {
-                                                        const updatedList = [...draft.aboutUs.milestones];
-                                                        updatedList[idx].description = e.target.value;
-                                                        updateField("aboutUs", "milestones", updatedList);
-                                                    }}
-                                                    className="w-full px-2 py-1 text-xs border rounded-lg bg-white disabled:opacity-70"
-                                                />
-                                            </div>
-                                        </div>
-                                    ))}
+                                        ))}
+                                    </div>
                                 </div>
                             </div>
                         )}
