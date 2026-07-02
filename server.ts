@@ -641,7 +641,7 @@ app.use((err: any, req: express.Request, res: express.Response, next: express.Ne
     });
 });
 async function startServer() {
-    if (process.env.NODE_ENV !== "production") {
+    if (process.env.NODE_ENV !== "production" && !process.env.VERCEL) {
         const { createServer: createViteServer } = await import("vite");
         const vite = await createViteServer({
             server: { middlewareMode: true },
